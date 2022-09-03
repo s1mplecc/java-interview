@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class PriorityQueue {
+class PriorityQueue {
     private final List<Integer> queue;
 
     public PriorityQueue() {
@@ -23,11 +23,11 @@ public class PriorityQueue {
         queue.add(value);
         int index = queue.size() - 1;
         while (index > 0) {
-            int parent_index = (index - 1) / 2;
-            if (queue.get(index) > queue.get(parent_index)) {
-                this.swap(index, parent_index);
+            int parentIndex = (index - 1) / 2;
+            if (queue.get(index) > queue.get(parentIndex)) {
+                this.swap(index, parentIndex);
             }
-            index = parent_index;
+            index = parentIndex;
         }
     }
 
