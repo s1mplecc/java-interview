@@ -1,7 +1,9 @@
+package datastructure;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class PriorityQueue {
+public class PriorityQueue {
     private final List<Integer> queue;
 
     public PriorityQueue() {
