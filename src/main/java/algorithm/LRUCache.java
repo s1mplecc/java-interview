@@ -38,6 +38,7 @@ public class LRUCache {
     }
 
     public Object[] cacheSequence() {
+//        Integer[] integers = Arrays.stream(cache.keySet().toArray()).toArray(Integer[]::new);
         return cache.keySet().toArray();
     }
 }

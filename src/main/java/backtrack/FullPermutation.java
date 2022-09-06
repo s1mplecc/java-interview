@@ -2,7 +2,9 @@ package backtrack;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
@@ -17,15 +19,13 @@ public class FullPermutation {
     public FullPermutation(int[] nums) {
         this.nums = nums;
         this.permutations = new ArrayList<>();
-        ;
     }
 
     public List<List<Integer>> sequences() {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int num : nums) {
-            list.add(num);
-        }
-        backTracing(list, new ArrayList<>());
+        List<Integer> nums = Arrays.stream(this.nums)
+                .boxed()
+                .collect(Collectors.toList());
+        backTracing(nums, new ArrayList<>());
         return permutations;
     }
 
@@ -34,10 +34,10 @@ public class FullPermutation {
             permutations.add(current);
         }
         for (int i = 0; i < remain.size(); i++) {
-            List<Integer> newRemain = new ArrayList<>(remain);
-            List<Integer> newCurrent = new ArrayList<>(current);
-            newCurrent.add(newRemain.remove(i));
-            backTracing(newRemain, newCurrent);
+            List<Integer> forkRemain = new ArrayList<>(remain);
+            List<Integer> forkCurrent = new ArrayList<>(current);
+            forkCurrent.add(forkRemain.remove(i));
+            backTracing(forkRemain, forkCurrent);
         }
     }
 }
