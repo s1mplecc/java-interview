@@ -69,7 +69,8 @@ public class BiTree {
     public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
         ArrayList<ArrayList<Integer>> levelOrder = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        if (root != null)
+            queue.add(root);
         while (!queue.isEmpty()) {
             ArrayList<Integer> curLevel = new ArrayList<>();
             int size = queue.size();
@@ -82,6 +83,40 @@ public class BiTree {
                     queue.add(node.right);
             }
             levelOrder.add(curLevel);
+        }
+        return levelOrder;
+    }
+
+
+    /**
+     * 之字遍历
+     *
+     * @return [[1], [3, 2], [4, 5, 6, 7]]
+     */
+    public ArrayList<ArrayList<Integer>> zOrder(TreeNode root) {
+        ArrayList<ArrayList<Integer>> levelOrder = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        boolean leftToRight = true;
+        while (!queue.isEmpty()) {
+            ArrayDeque<Integer> curLevel = new ArrayDeque<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null)
+                    queue.add(node.left);
+                if (node.right != null)
+                    queue.add(node.right);
+
+                if (leftToRight)
+                    curLevel.addLast(node.val);
+                else
+                    curLevel.addFirst(node.val);
+            }
+            levelOrder.add(new ArrayList<>(curLevel));
+            leftToRight = !leftToRight;
         }
         return levelOrder;
     }
