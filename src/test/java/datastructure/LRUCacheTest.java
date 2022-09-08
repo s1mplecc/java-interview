@@ -1,5 +1,6 @@
-package algorithm;
+package datastructure;
 
+import datastructure.LRUCache;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -2,6 +2,10 @@ package dp;
 
 import java.util.Arrays;
 
+/**
+ * 有n件物品和一个最多能背重量为w的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。
+ * 每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。
+ */
 public class Bag01 {
 
     public int maxValue(int capacity, Product[] products) {
