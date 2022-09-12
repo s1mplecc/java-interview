@@ -50,4 +50,54 @@ public class MonotonicStack {
         }
         return result;
     }
+
+
+    /**
+     * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+     * <p>
+     * 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+     * 输出：6
+     * 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水。
+     */
+    public int catchRain(int[] height) {
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> lowLayer = new Stack<>();
+        int result = 0;
+        for (int i = 0; i < height.length; i++) {
+            if (height[i] == 0)
+                continue;
+            while (!stack.isEmpty() && height[i] >= height[stack.peek()]) {
+                int lastIndex = stack.pop();
+                result += height[lastIndex] * (i - lastIndex - 1);
+                if (!lowLayer.isEmpty()) {
+                    result -= lowLayer.pop();
+                }
+                if (!stack.isEmpty())
+                    lowLayer.add(height[lastIndex] * (i - lastIndex + 1));
+            }
+            stack.add(i);
+        }
+        return result;
+    }
+
+    public int catchRainByDP(int[] height) {
+        int size = height.length;
+        int[] dp1 = new int[size];
+        dp1[0] = 0;
+        int[] dp2 = new int[size];
+        dp2[size - 1] = 0;
+        for (int i = 1; i < size; i++) {
+            dp1[i] = Math.max(dp1[i - 1], height[i - 1]);
+        }
+        for (int i = size - 2; i >= 0 ; i--) {
+            dp2[i] = Math.max(dp2[i + 1], height[i + 1]);
+        }
+
+        int result = 0;
+        for (int i = 1; i < size - 1; i++) {
+            result += Math.max(0, Math.min(dp1[i], dp2[i]) - height[i]);
+        }
+
+        return result;
+    }
 }
