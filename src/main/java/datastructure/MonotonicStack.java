@@ -61,19 +61,15 @@ public class MonotonicStack {
      */
     public int catchRain(int[] height) {
         Stack<Integer> stack = new Stack<>();
-        Stack<Integer> lowLayer = new Stack<>();
         int result = 0;
         for (int i = 0; i < height.length; i++) {
-            if (height[i] == 0)
-                continue;
             while (!stack.isEmpty() && height[i] >= height[stack.peek()]) {
-                int lastIndex = stack.pop();
-                result += height[lastIndex] * (i - lastIndex - 1);
-                if (!lowLayer.isEmpty()) {
-                    result -= lowLayer.pop();
+                int floorIndex = stack.pop();
+                if (!stack.isEmpty()) {
+                    Integer leftIndex = stack.peek();
+                    result += (Math.min(height[leftIndex], height[i]) - height[floorIndex])
+                            * (i - leftIndex - 1);
                 }
-                if (!stack.isEmpty())
-                    lowLayer.add(height[lastIndex] * (i - lastIndex + 1));
             }
             stack.add(i);
         }
@@ -89,7 +85,7 @@ public class MonotonicStack {
         for (int i = 1; i < size; i++) {
             dp1[i] = Math.max(dp1[i - 1], height[i - 1]);
         }
-        for (int i = size - 2; i >= 0 ; i--) {
+        for (int i = size - 2; i >= 0; i--) {
             dp2[i] = Math.max(dp2[i + 1], height[i + 1]);
         }
 
