@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class Bag01 {
 
-    public int maxValue(int capacity, Product[] products) {
+    public int maxValueBy2DimDP(int capacity, Product[] products) {
         int[][] dp = new int[products.length][capacity + 1];
         for (int i = 0; i < products.length; i++) {
             dp[i][0] = 0;
@@ -31,17 +31,38 @@ public class Bag01 {
             }
         }
 
-        printDp(dp);
+        print2DimDP(dp);
         return dp[products.length - 1][capacity];
     }
 
-    private void printDp(int[][] dp) {
+    public int maxValueBy1DimDP(int capacity, Product[] products) {
+        int[] dp = new int[capacity + 1];
+
+        for (Product product : products) {
+            for (int j = capacity; j > 0; j--) {  // 从后往前，防止重复放入
+                if (j >= product.weight) {
+                    // 不放入：dp[j]，相当于 dp[i - 1][j]；放入：dp[j - product.weight] + product.value
+                    dp[j] = Math.max(dp[j], dp[j - product.weight] + product.value);
+                }
+            }
+        }
+
+        print1DimDP(dp);
+        return dp[capacity];
+    }
+
+    private void print1DimDP(int[] dp) {
+        System.out.println(String.join(" ", Arrays.stream(dp).mapToObj(String::valueOf).toArray(CharSequence[]::new)));
+    }
+
+    private void print2DimDP(int[][] dp) {
         Arrays.stream(dp).forEach((each) -> {
             for (int i : each) {
                 System.out.print(i + " ");
             }
             System.out.println();
         });
+        System.out.println();
     }
 
     public static class Product {
