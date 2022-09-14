@@ -12,6 +12,25 @@ public class TargetSum {
      * 输入：nums: [1, 1, 1, 1, 1], S: 3
      * 输出：5
      */
+    public int findTargetSumWaysBy1DimDP(int[] nums, int target) {
+        int sum = Arrays.stream(nums).sum();
+        if ((sum + target) % 2 == 1 || Math.abs(target) > sum)
+            return 0;
+
+        int bagSize = (sum + target) >> 1;
+        int[] dp = new int[bagSize + 1];
+        dp[0] = 1;  // 填满容量0的包有1种方法，即都不放入
+
+        for (int num : nums) {
+            for (int i = bagSize; i >= 0; i--) {  // 判断条件取>=，num可以为0
+                if (i >= num)
+                    dp[i] = dp[i] + dp[i - num];
+            }
+        }
+
+        return dp[bagSize];
+    }
+
     public int findTargetSumWaysBy2DimDP(int[] nums, int target) {
         int sum = Arrays.stream(nums).sum();
         if ((sum + target) % 2 == 1 || Math.abs(target) > sum)
@@ -23,7 +42,7 @@ public class TargetSum {
             return target == 0 ? 1 << count0 : 0;
 
         int bagSize = (sum + target) >> 1;
-        int[][] dp = initDP(nums, bagSize);  // dp[i][j] 表示：加入物品i后填满j这么大容积的包，有dp[i][j]种方法
+        int[][] dp = initDP(nums, bagSize);  // dp[i][j] 表示：加入物品i后填满容量j的包，有dp[i][j]种方法
 
         for (int i = 1; i < nums.length; i++) {
             for (int j = 1; j < bagSize + 1; j++) {
