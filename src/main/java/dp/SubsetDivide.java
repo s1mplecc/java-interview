@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 划分等和子集（变种背包问题）
  */
-public class DivideSubset {
+public class SubsetDivide {
 
     /**
      * 题目链接：https://leetcode.cn/problems/partition-equal-subset-sum/comments/

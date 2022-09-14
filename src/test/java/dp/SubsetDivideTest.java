@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DivideSubsetTest {
+public class SubsetDivideTest {
     @Test
     public void should_divide_subset_by_back_tracing() {
-        DivideSubset divide = new DivideSubset();
+        SubsetDivide divide = new SubsetDivide();
 
         assertThat(divide.canPartitionByBackTracing(new int[]{1, 5, 11, 5})).isTrue();
         assertThat(divide.canPartitionByBackTracing(new int[]{1, 5, 11, 5, 1, 3})).isTrue();
@@ -17,7 +17,7 @@ public class DivideSubsetTest {
 
     @Test
     public void should_divide_subset_by_dp() {
-        DivideSubset divide = new DivideSubset();
+        SubsetDivide divide = new SubsetDivide();
 
         assertThat(divide.canPartition(new int[]{1, 5, 11, 5})).isTrue();
         assertThat(divide.canPartition(new int[]{1, 5, 11, 5, 1, 3})).isTrue();
