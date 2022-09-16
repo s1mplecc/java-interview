@@ -71,7 +71,7 @@ public class BiTree {
 
         ArrayList<Integer> inorder = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = root;
+        TreeNode cur = root;  // 指针 + 栈
 
         while (cur != null || !stack.isEmpty()) {
             if (cur != null) {
