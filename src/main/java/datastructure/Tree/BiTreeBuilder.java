@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.Tree;
 
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ public class BiTreeBuilder {
      * 输入：inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
      * 输出：[3,9,20,null,null,15,7]
      */
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
+    public TreeNode buildTreeByInPost(int[] inorder, int[] postorder) {
         if (postorder.length == 0)
             return null;
 
@@ -32,8 +32,8 @@ public class BiTreeBuilder {
         int[] leftPostorder = Arrays.copyOfRange(postorder, 0, splitIndex);
         int[] rightPostorder = Arrays.copyOfRange(postorder, splitIndex, inorder.length - 1);
 
-        root.left = buildTree(leftInorder, leftPostorder);
-        root.right = buildTree(rightInorder, rightPostorder);
+        root.left = buildTreeByInPost(leftInorder, leftPostorder);
+        root.right = buildTreeByInPost(rightInorder, rightPostorder);
 
         return root;
     }
@@ -46,7 +46,7 @@ public class BiTreeBuilder {
      * 输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
      * 输出: [3,9,20,null,null,15,7]
      */
-    public TreeNode buildTree2(int[] preorder, int[] inorder) {
+    public TreeNode buildTreeByPreIn(int[] preorder, int[] inorder) {
         if (preorder.length == 0)
             return null;
 
@@ -66,19 +66,9 @@ public class BiTreeBuilder {
         int[] leftPreorder = Arrays.copyOfRange(preorder, 1, splitIndex + 1);
         int[] rightPreorder = Arrays.copyOfRange(preorder, splitIndex + 1, preorder.length);
 
-        root.left = buildTree2(leftPreorder, leftInorder);
-        root.right = buildTree2(rightPreorder, rightInorder);
+        root.left = buildTreeByPreIn(leftPreorder, leftInorder);
+        root.right = buildTreeByPreIn(rightPreorder, rightInorder);
 
         return root;
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int val) {
-            this.val = val;
-        }
     }
 }
