@@ -13,7 +13,6 @@ import java.util.Queue;
  */
 public class StackByQueue {
     private Queue<Integer>[] queues = new Queue[2];
-    ;
     private int switchIndex;
 
     public StackByQueue() {
