@@ -2,12 +2,33 @@ package dp;
 
 import java.util.Arrays;
 
+
 /**
- * 有n件物品和一个最多能背重量为w的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。
- * 每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。
+ * 背包递推公式
+ * <p>
+ * 问能否能装满背包（或者最多装多少）：dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]); ，对应题目如下：
+ * 动态规划：416.分割等和子集(opens new window)
+ * 动态规划：1049.最后一块石头的重量 II(opens new window)
+ * <p>
+ * 问装满背包有几种方法：dp[j] += dp[j - nums[i]] ，对应题目如下：
+ * 动态规划：494.目标和(opens new window)
+ * 动态规划：518. 零钱兑换 II(opens new window)
+ * 动态规划：377.组合总和Ⅳ(opens new window)
+ * 动态规划：70. 爬楼梯进阶版（完全背包）(opens new window)
+ * <p>
+ * 问背包装满最大价值：dp[j] = max(dp[j], dp[j - weight[i]] + value[i]); ，对应题目如下：
+ * 动态规划：474.一和零(opens new window)
+ * <p>
+ * 问装满背包所有物品的最小个数：dp[j] = min(dp[j - coins[i]] + 1, dp[j]); ，对应题目如下：
+ * 动态规划：322.零钱兑换(opens new window)
+ * 动态规划：279.完全平方数(opens new window)
  */
 public class Bag01 {
 
+    /**
+     * 有n件物品和一个最多能背重量为w的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。
+     * 每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大。
+     */
     public int maxValueBy2DimDP(int capacity, Product[] products) {
         int[][] dp = new int[products.length][capacity + 1];
         for (int i = 0; i < products.length; i++) {
