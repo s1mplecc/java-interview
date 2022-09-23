@@ -1,0 +1,68 @@
+package dp;
+
+import java.util.Arrays;
+
+public class SubSequence {
+    /**
+     * 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
+     * 若这两个字符串没有公共子序列，则返回 0。
+     * <p>
+     * 输入：text1 = "abcde", text2 = "ace" 输出：3 解释：最长公共子序列是 "ace"，它的长度为 3。
+     * 输入：text1 = "abc", text2 = "abc" 输出：3 解释：最长公共子序列是 "abc"，它的长度为 3。
+     * 输入：text1 = "abc", text2 = "def" 输出：0 解释：两个字符串没有公共子序列，返回 0。
+     */
+    public int longestCommonSubsequence(String text1, String text2) {
+        int[][] dp = new int[text1.length() + 1][text2.length() + 1];
+
+        for (int i = 1; i < text1.length() + 1; i++) {
+            for (int j = 1; j < text2.length() + 1; j++) {
+                if (text1.charAt(i - 1) == text2.charAt(j - 1))
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                else
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+
+        return dp[text1.length()][text2.length()];
+    }
+
+    /**
+     * 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
+     * <p>
+     * 输入：nums = [10,9,2,5,3,7,101,18] 输出：4 解释：最长递增子序列是 [2,3,7,101]，因此长度为 4 。
+     * 输入：nums = [0,1,0,3,2,3] 输出：4
+     * 输入：nums = [7,7,7,7,7,7,7] 输出：1
+     */
+    public int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];  // dp[i]表示以第i个元素结尾的最长递增子序列长度
+        Arrays.fill(dp, 1);
+        int max = 1;
+
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j])
+                    dp[i] = Math.max(dp[j] + 1, dp[i]);
+            }
+            max = Math.max(max, dp[i]);  // 一次遍历统计max
+        }
+
+        return max;
+    }
+
+    /**
+     * 给定一个未经排序的整数数组，找到最长且连续递增的子序列，并返回该序列的长度。
+     * <p>
+     * 输入：nums = [1,3,5,4,7] 输出：3 解释：最长连续递增序列是 [1,3,5], 长度为3。 尽管 [1,3,5,7] 也是升序的子序列, 但它不是连续的，因为 5 和 7 在原数组里被 4 隔开。
+     * 输入：nums = [2,2,2,2,2] 输出：1 解释：最长连续递增序列是 [2], 长度为1。
+     */
+    public int findLengthOfLCIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1])
+                dp[i] = dp[i - 1] + 1;
+        }
+        return Arrays.stream(dp).max().getAsInt();
+    }
+}
