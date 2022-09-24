@@ -27,4 +27,10 @@ public class StringSubsequenceTest {
         StringSubsequence subsequence = new StringSubsequence();
         assertThat(subsequence.numDistinct("rabbbit", "rabbit")).isEqualTo(3);
     }
+
+    @Test
+    public void should_return_min_distance() {
+        StringSubsequence subsequence = new StringSubsequence();
+        assertThat(subsequence.minDistance("sea", "eat")).isEqualTo(2);
+    }
 }
