@@ -33,4 +33,10 @@ public class StringSubsequenceTest {
         StringSubsequence subsequence = new StringSubsequence();
         assertThat(subsequence.minDistance("sea", "eat")).isEqualTo(2);
     }
+
+    @Test
+    public void should_compute_edit_distance_by_dp() {
+        StringSubsequence subsequence = new StringSubsequence();
+        assertThat(subsequence.editDistance("horse", "ros")).isEqualTo(3);
+    }
 }
