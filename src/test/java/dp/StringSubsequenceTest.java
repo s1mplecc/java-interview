@@ -21,4 +21,10 @@ public class StringSubsequenceTest {
         assertThat(subsequence.isSubsequence("axc", "ahbgdc")).isFalse();
         assertThat(subsequence.isSubsequence("aaaaaa", "bbaaaa")).isFalse();
     }
+
+    @Test
+    public void should_return_num_distinct() {
+        StringSubsequence subsequence = new StringSubsequence();
+        assertThat(subsequence.numDistinct("rabbbit", "rabbit")).isEqualTo(3);
+    }
 }

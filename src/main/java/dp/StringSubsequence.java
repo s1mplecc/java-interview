@@ -1,5 +1,7 @@
 package dp;
 
+import java.util.Arrays;
+
 public class StringSubsequence {
 
     /**
@@ -38,5 +40,30 @@ public class StringSubsequence {
             j++;
         }
         return i == s.length();
+    }
+
+    /**
+     * 题目链接：https://leetcode.cn/problems/distinct-subsequences
+     * <p>
+     * 给定一个字符串 s 和一个字符串 t ，计算在 s 的子序列中 t 出现的个数。
+     * <p>
+     * 输入：s = "rabbbit", t = "rabbit"
+     * 输出：3
+     * 解释：有 3 种可以从 s 中得到 "rabbit" 的方案。
+     */
+    public int numDistinct(String s, String t) {
+        int[][] dp = new int[t.length() + 1][s.length() + 1];  // dp[i][j]表示以i-1为结尾的t出现在以j-1为结尾的s子序列中的个数
+        Arrays.fill(dp[0], 1);
+
+        for (int i = 1; i < t.length() + 1; i++) {
+            for (int j = i; j < s.length() + 1; j++) {
+                if (t.charAt(i - 1) == s.charAt(j - 1))
+                    dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1];  // dp[i][j - 1]不使用s[j-1]结尾，dp[i - 1][j - 1]使用s[j-1]结尾
+                else
+                    dp[i][j] = dp[i][j - 1];
+            }
+        }
+
+        return dp[t.length()][s.length()];
     }
 }
