@@ -13,4 +13,12 @@ public class StringSubsequenceTest {
         assertThat(subsequence.isSubsequenceByDoublePointer("axc", "ahbgdc")).isFalse();
         assertThat(subsequence.isSubsequenceByDoublePointer("aaaaaa", "bbaaaa")).isFalse();
     }
+
+    @Test
+    public void should_return_is_subsequence_by_dp() {
+        StringSubsequence subsequence = new StringSubsequence();
+        assertThat(subsequence.isSubsequence("abc", "ahbgdc")).isTrue();
+        assertThat(subsequence.isSubsequence("axc", "ahbgdc")).isFalse();
+        assertThat(subsequence.isSubsequence("aaaaaa", "bbaaaa")).isFalse();
+    }
 }
