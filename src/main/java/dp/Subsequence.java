@@ -2,7 +2,7 @@ package dp;
 
 import java.util.Arrays;
 
-public class SubSequence {
+public class Subsequence {
     /**
      * 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
      * 若这两个字符串没有公共子序列，则返回 0。
