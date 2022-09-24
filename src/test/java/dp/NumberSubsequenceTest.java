@@ -25,4 +25,11 @@ public class NumberSubsequenceTest {
                 new int[]{1, 2, 3, 2, 1},
                 new int[]{3, 2, 1, 4, 7})).isEqualTo(3);
     }
+
+    @Test
+    public void should_return_max_uncrossed_lines() {
+        NumberSubsequence subsequence = new NumberSubsequence();
+
+        assertThat(subsequence.maxUncrossedLines(new int[]{1, 4, 2}, new int[]{1, 2, 4})).isEqualTo(2);
+    }
 }
