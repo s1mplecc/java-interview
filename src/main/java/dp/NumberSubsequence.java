@@ -2,29 +2,7 @@ package dp;
 
 import java.util.Arrays;
 
-public class Subsequence {
-    /**
-     * 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
-     * 若这两个字符串没有公共子序列，则返回 0。
-     * <p>
-     * 输入：text1 = "abcde", text2 = "ace" 输出：3 解释：最长公共子序列是 "ace"，它的长度为 3。
-     * 输入：text1 = "abc", text2 = "abc" 输出：3 解释：最长公共子序列是 "abc"，它的长度为 3。
-     * 输入：text1 = "abc", text2 = "def" 输出：0 解释：两个字符串没有公共子序列，返回 0。
-     */
-    public int longestCommonSubsequence(String text1, String text2) {
-        int[][] dp = new int[text1.length() + 1][text2.length() + 1];
-
-        for (int i = 1; i < text1.length() + 1; i++) {
-            for (int j = 1; j < text2.length() + 1; j++) {
-                if (text1.charAt(i - 1) == text2.charAt(j - 1))
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
-                else
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-            }
-        }
-
-        return dp[text1.length()][text2.length()];
-    }
+public class NumberSubsequence {
 
     /**
      * 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
